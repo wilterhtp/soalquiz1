@@ -1,0 +1,899 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuis Pemrograman Web</title>
+
+<style>
+/* PENGATURAN DASAR */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef3fa;
+    color: #26344a;
+    min-height: 100vh;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* BAGIAN KEPALA */
+.header {
+    background: linear-gradient(120deg, #142d59, #2563eb);
+    color: white;
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #80e5ff;
+}
+
+.label {
+    background: #ffffff20;
+    padding: 8px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* KONTEN UTAMA */
+.container {
+    max-width: 1050px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* BANNER */
+.banner {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 5px 20px #17345c12;
+    margin-bottom: 25px;
+}
+
+.banner h1 {
+    font-size: 27px;
+    color: #17376d;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.banner p {
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.ilustrasi {
+    width: 100%;
+    max-height: 170px;
+}
+
+/* INFORMASI */
+.info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 17px;
+    text-align: center;
+    box-shadow: 0 3px 12px #17345c0c;
+}
+
+.info-card strong {
+    display: block;
+    font-size: 22px;
+    color: #2563eb;
+    margin-bottom: 5px;
+}
+
+.info-card small {
+    color: #8190a5;
+}
+
+/* AREA KUIS */
+.quiz-card {
+    background: white;
+    border-radius: 17px;
+    padding: 27px;
+    box-shadow: 0 5px 20px #17345c12;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.quiz-header h2 {
+    font-size: 19px;
+    color: #17376d;
+}
+
+.nomor {
+    background: #e9f1ff;
+    color: #2563eb;
+    padding: 8px 13px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* PROGRES */
+.progress-bg {
+    width: 100%;
+    height: 9px;
+    background: #e7edf5;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 10%;
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #16c4d9);
+    transition: .3s;
+}
+
+/* PERTANYAAN */
+.topik {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.pertanyaan {
+    font-size: 19px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #23344e;
+}
+
+/* PILIHAN JAWABAN */
+.pilihan {
+    display: grid;
+    gap: 12px;
+}
+
+.opsi {
+    border: 1px solid #dce4ef;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: .2s;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.opsi:hover {
+    background: #f1f6ff;
+    border-color: #2563eb;
+}
+
+.opsi.terpilih {
+    background: #eaf2ff;
+    border: 2px solid #2563eb;
+}
+
+.opsi input {
+    accent-color: #2563eb;
+}
+
+/* KOTAK KODE */
+.kotak-kode {
+    background: #172337;
+    color: #d8e8ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 18px;
+    overflow-x: auto;
+}
+
+.kotak-kode small {
+    color: #80e5ff;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.kotak-kode pre {
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.9;
+    white-space: pre-wrap;
+}
+
+.isian-kode {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #dce4ef;
+    border-radius: 9px;
+    outline: none;
+    font-family: Consolas, monospace;
+    font-size: 15px;
+}
+
+.isian-kode:focus {
+    border-color: #2563eb;
+}
+
+/* TOMBOL */
+.tombol-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+    gap: 12px;
+}
+
+.btn {
+    padding: 13px 23px;
+    border: none;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+.btn-kembali {
+    background: #e9eef6;
+    color: #52647d;
+}
+
+.btn-lanjut {
+    background: #2563eb;
+    color: white;
+}
+
+.btn:hover {
+    opacity: .85;
+}
+
+/* PETUNJUK */
+.petunjuk {
+    background: #fff8e8;
+    border-left: 4px solid #f5b942;
+    padding: 14px;
+    border-radius: 7px;
+    color: #775a20;
+    font-size: 12px;
+    margin-top: 22px;
+    line-height: 1.6;
+}
+
+/* HASIL */
+.hasil {
+    display: none;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.lingkaran {
+    width: 125px;
+    height: 125px;
+    background: #e8f2ff;
+    color: #2563eb;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 20px auto;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.hasil h2 {
+    color: #17376d;
+    margin-bottom: 12px;
+}
+
+.hasil p {
+    color: #718096;
+    line-height: 1.7;
+}
+
+.status {
+    display: inline-block;
+    padding: 9px 18px;
+    background: #dcfce7;
+    color: #15803d;
+    border-radius: 20px;
+    margin: 15px;
+    font-weight: bold;
+}
+
+.detail-hasil {
+    background: #f2f6fc;
+    border-radius: 12px;
+    padding: 17px;
+    margin-top: 20px;
+    text-align: left;
+    line-height: 2;
+}
+
+/* HALAMAN BATAL */
+.layar-batal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #101b31;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.layar-batal h1 {
+    color: #ff7979;
+    margin-bottom: 15px;
+}
+
+.layar-batal p {
+    color: #cbd5e1;
+    line-height: 1.8;
+}
+
+/* KAKI HALAMAN */
+footer {
+    text-align: center;
+    color: #8a98ad;
+    font-size: 12px;
+    padding: 25px;
+}
+
+/* TAMPILAN LAPTOP DAN TABLET */
+@media(max-width: 650px) {
+    .banner {
+        grid-template-columns: 1fr;
+    }
+
+    .ilustrasi {
+        max-height: 120px;
+    }
+
+    .banner h1 {
+        font-size: 22px;
+    }
+
+    .info {
+        grid-template-columns: 1fr;
+    }
+
+    .quiz-card {
+        padding: 18px;
+    }
+
+    .header {
+        padding: 18px;
+    }
+
+    .label {
+        display: none;
+    }
+
+    .tombol-area {
+        flex-wrap: wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- KEPALA HALAMAN -->
+<header class="header">
+    <div class="logo">WEB<span>QUIZ.</span></div>
+    <div class="label">UJIAN PEMROGRAMAN WEB</div>
+</header>
+
+<main class="container">
+
+    <!-- BANNER -->
+    <section class="banner" id="banner">
+        <div>
+            <p class="topik">TANTANGAN KOMPETENSI DIGITAL</p>
+            <h1>Kuis Pemrograman Web</h1>
+            <p>
+                Uji kemampuanmu dalam memahami HTML, CSS,
+                JavaScript, dan dasar pembuatan website.
+                Kerjakan dengan teliti dan selesaikan tantangannya!
+            </p>
+        </div>
+
+        <!-- ILUSTRASI PEMROGRAMAN -->
+        <svg class="ilustrasi" viewBox="0 0 300 190"
+             xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="15" width="260" height="155"
+                  rx="14" fill="#142d59"/>
+            <rect x="20" y="15" width="260" height="28"
+                  rx="14" fill="#284779"/>
+            <circle cx="39" cy="29" r="5" fill="#ff7474"/>
+            <circle cx="56" cy="29" r="5" fill="#ffd166"/>
+            <circle cx="73" cy="29" r="5" fill="#61d99b"/>
+            <path d="M85 75 L65 95 L85 115"
+                  stroke="#52dfff" stroke-width="6"
+                  fill="none" stroke-linecap="round"/>
+            <path d="M215 75 L235 95 L215 115"
+                  stroke="#52dfff" stroke-width="6"
+                  fill="none" stroke-linecap="round"/>
+            <path d="M165 65 L135 125"
+                  stroke="#a78bfa" stroke-width="6"
+                  stroke-linecap="round"/>
+            <rect x="105" y="135" width="90" height="8"
+                  rx="4" fill="#5579ad"/>
+            <circle cx="248" cy="145" r="12" fill="#8b5cf6"/>
+            <path d="M248 137 L251 143 L257 145 L251 148 L248 154 L245 148 L239 145 L245 143 Z"
+                  fill="white"/>
+        </svg>
+    </section>
+
+    <!-- INFORMASI KUIS -->
+    <section class="info">
+        <div class="info-card">
+            <strong>10</strong>
+            <small>Jumlah Soal</small>
+        </div>
+
+        <div class="info-card">
+            <strong>100</strong>
+            <small>Nilai Maksimal</small>
+        </div>
+
+        <div class="info-card">
+            <strong>HTML / CSS / JS</strong>
+            <small>Materi Kuis</small>
+        </div>
+    </section>
+
+    <!-- AREA PERTANYAAN -->
+    <section class="quiz-card" id="areaKuis">
+
+        <div class="quiz-header">
+            <h2>Kerjakan Soal Berikut</h2>
+            <span class="nomor" id="nomor">Soal 1 / 10</span>
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div id="kontenSoal">
+            <div class="topik" id="kategori">DASAR HTML</div>
+            <div class="pertanyaan" id="pertanyaan"></div>
+            <div id="jawaban" class="pilihan"></div>
+        </div>
+
+        <div class="tombol-area">
+            <button class="btn btn-kembali" id="sebelumnya"
+                    onclick="soalSebelumnya()">
+                ← Sebelumnya
+            </button>
+
+            <button class="btn btn-lanjut" id="berikutnya"
+                    onclick="soalBerikutnya()">
+                Selanjutnya →
+            </button>
+        </div>
+
+        <div class="petunjuk">
+            ⚠️ <b>Perhatian:</b> Kerjakan soal secara mandiri.
+            Jangan meninggalkan halaman kuis. Perpindahan tab,
+            penutupan halaman, atau navigasi keluar akan
+            membatalkan pengerjaan sesuai mekanisme kuis.
+        </div>
+
+    </section>
+
+    <!-- HASIL KUIS -->
+    <section class="quiz-card hasil" id="hasil">
+        <h2>Kuis Telah Selesai!</h2>
+        <div class="lingkaran" id="nilai">0</div>
+        <div class="status">STATUS: SELESAI</div>
+        <p>Terima kasih telah mengikuti Kuis Pemrograman Web.</p>
+
+        <div class="detail-hasil">
+            <p>Jumlah soal: <b>10</b></p>
+            <p>Jawaban benar: <b id="benar">0</b></p>
+            <p>Jawaban salah: <b id="salah">0</b></p>
+            <p>Nilai akhir: <b id="nilaiAkhir">0</b></p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 Kuis Pemrograman Web | Belajar, Berlatih, Berinovasi.
+</footer>
+
+<!-- LAYAR JIKA KUIS DIBATALKAN -->
+<div class="layar-batal" id="layarBatal">
+    <div>
+        <h1>⚠️ KUIS DIBATALKAN!</h1>
+        <p>
+            Sistem mendeteksi bahwa halaman kuis telah
+            ditinggalkan atau ditutup.<br>
+            Jawaban pengerjaan telah dihapus dari sesi ini.<br><br>
+            <b>Status pengerjaan: BATAL</b>
+        </p>
+    </div>
+</div>
+
+<script>
+/* DATA SOAL KUIS */
+const daftarSoal = [
+
+    {
+        kategori: "DASAR HTML",
+        pertanyaan: "Apa fungsi utama HTML dalam pembuatan website?",
+        jenis: "pilihan",
+        pilihan: [
+            "Mengatur struktur dan isi halaman web",
+            "Mengatur koneksi internet",
+            "Mengelola sistem operasi",
+            "Mengatur perangkat keras komputer"
+        ],
+        kunci: 0
+    },
+
+    {
+        kategori: "STRUKTUR HTML",
+        pertanyaan: "Tag HTML manakah yang digunakan untuk membuat judul utama halaman?",
+        jenis: "pilihan",
+        pilihan: [
+            "<p>",
+            "<h1>",
+            "<br>",
+            "<img>"
+        ],
+        kunci: 1
+    },
+
+    {
+        kategori: "PRAKTIK HTML",
+        pertanyaan: "Lengkapi kode berikut agar menampilkan tulisan Selamat Belajar!",
+        jenis: "kode",
+        kode: '<!-- Lengkapi tag HTML berikut -->\n________ Selamat Belajar! ________',
+        kunci: "<h1>selamat belajar!</h1>"
+    },
+
+    {
+        kategori: "DASAR CSS",
+        pertanyaan: "Apa fungsi CSS dalam sebuah website?",
+        jenis: "pilihan",
+        pilihan: [
+            "Menyimpan data pengguna",
+            "Mengatur tampilan dan desain halaman web",
+            "Membuat database",
+            "Menghubungkan komputer ke internet"
+        ],
+        kunci: 1
+    },
+
+    {
+        kategori: "PRAKTIK CSS",
+        pertanyaan: "Lengkapi kode CSS berikut agar teks menjadi berwarna merah.",
+        jenis: "kode",
+        kode: 'h1 {\n    ______: red;\n}',
+        kunci: "color"
+    },
+
+    {
+        kategori: "SELECTOR CSS",
+        pertanyaan: "Selector CSS apa yang digunakan untuk memilih elemen dengan id bernama judul?",
+        jenis: "pilihan",
+        pilihan: [
+            ".judul",
+            "#judul",
+            "*judul",
+            "judul."
+        ],
+        kunci: 1
+    },
+
+    {
+        kategori: "DASAR JAVASCRIPT",
+        pertanyaan: "Apa kegunaan JavaScript dalam pengembangan website?",
+        jenis: "pilihan",
+        pilihan: [
+            "Memberikan interaksi dan perilaku dinamis",
+            "Menggantikan seluruh fungsi HTML",
+            "Membuat kabel jaringan",
+            "Mengatur kapasitas hard disk"
+        ],
+        kunci: 0
+    },
+
+    {
+        kategori: "PRAKTIK JAVASCRIPT",
+        pertanyaan: "Lengkapi kode berikut agar menampilkan tulisan Halo Siswa! pada konsol.",
+        jenis: "kode",
+        kode: '________("Halo Siswa!");',
+        kunci: 'console.log'
+    },
+
+    {
+        kategori: "HYPERLINK HTML",
+        pertanyaan: "Tag HTML apa yang digunakan untuk membuat tautan menuju halaman lain?",
+        jenis: "pilihan",
+        pilihan: [
+            "<link>",
+            "<a>",
+            "<href>",
+            "<url>"
+        ],
+        kunci: 1
+    },
+
+    {
+        kategori: "STRUKTUR WEBSITE",
+        pertanyaan: "Tag manakah yang digunakan untuk menampilkan gambar pada halaman HTML?",
+        jenis: "pilihan",
+        pilihan: [
+            "<picture-text>",
+            "<image>",
+            "<img>",
+            "<photo>"
+        ],
+        kunci: 2
+    }
+
+];
+
+/* VARIABEL KUIS */
+let nomorSoal = 0;
+let jawabanSiswa = new Array(daftarSoal.length).fill(null);
+let sudahSelesai = false;
+let sudahBatal = false;
+
+/* MENAMPILKAN SOAL */
+function tampilkanSoal() {
+
+    if (sudahBatal || sudahSelesai) return;
+
+    const soal = daftarSoal[nomorSoal];
+
+    document.getElementById("nomor").textContent =
+        `Soal ${nomorSoal + 1} / ${daftarSoal.length}`;
+
+    document.getElementById("kategori").textContent =
+        soal.kategori;
+
+    document.getElementById("pertanyaan").textContent =
+        soal.pertanyaan;
+
+    document.getElementById("progress").style.width =
+        ((nomorSoal + 1) / daftarSoal.length * 100) + "%";
+
+    const area = document.getElementById("jawaban");
+    area.innerHTML = "";
+
+    if (soal.jenis === "pilihan") {
+
+        soal.pilihan.forEach((pilihan, indeks) => {
+
+            const label = document.createElement("label");
+            label.className = "opsi";
+
+            if (jawabanSiswa[nomorSoal] === indeks) {
+                label.classList.add("terpilih");
+            }
+
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = "jawaban";
+            radio.value = indeks;
+            radio.checked = jawabanSiswa[nomorSoal] === indeks;
+
+            radio.addEventListener("change", () => {
+                jawabanSiswa[nomorSoal] = indeks;
+                tampilkanSoal();
+            });
+
+            label.appendChild(radio);
+            label.appendChild(
+                document.createTextNode(pilihan)
+            );
+
+            area.appendChild(label);
+        });
+
+    } else {
+
+        const kode = document.createElement("div");
+        kode.className = "kotak-kode";
+
+        const judulKode = document.createElement("small");
+        judulKode.textContent = "EDITOR KODE PROGRAM";
+
+        const isiKode = document.createElement("pre");
+        isiKode.textContent = soal.kode;
+
+        kode.appendChild(judulKode);
+        kode.appendChild(isiKode);
+
+        area.appendChild(kode);
+
+        const input = document.createElement("input");
+        input.className = "isian-kode";
+        input.type = "text";
+        input.placeholder = "Tuliskan jawaban kode di sini...";
+        input.value = jawabanSiswa[nomorSoal] || "";
+
+        input.addEventListener("input", () => {
+            jawabanSiswa[nomorSoal] = input.value;
+        });
+
+        area.appendChild(input);
+    }
+
+    document.getElementById("sebelumnya").disabled =
+        nomorSoal === 0;
+
+    document.getElementById("sebelumnya").style.opacity =
+        nomorSoal === 0 ? ".4" : "1";
+
+    document.getElementById("berikutnya").textContent =
+        nomorSoal === daftarSoal.length - 1
+        ? "Selesaikan Kuis ✓"
+        : "Selanjutnya →";
+}
+
+/* SOAL SEBELUMNYA */
+function soalSebelumnya() {
+    if (nomorSoal > 0 && !sudahBatal) {
+        nomorSoal--;
+        tampilkanSoal();
+    }
+}
+
+/* SOAL BERIKUTNYA */
+function soalBerikutnya() {
+
+    if (sudahBatal || sudahSelesai) return;
+
+    if (jawabanSiswa[nomorSoal] === null ||
+        String(jawabanSiswa[nomorSoal]).trim() === "") {
+
+        alert("Silakan isi jawaban terlebih dahulu!");
+        return;
+    }
+
+    if (nomorSoal < daftarSoal.length - 1) {
+        nomorSoal++;
+        tampilkanSoal();
+    } else {
+        selesaiKuis();
+    }
+}
+
+/* MEMERIKSA JAWABAN */
+function selesaiKuis() {
+
+    if (sudahBatal || sudahSelesai) return;
+
+    let jumlahBenar = 0;
+
+    daftarSoal.forEach((soal, indeks) => {
+
+        let jawaban = jawabanSiswa[indeks];
+
+        if (soal.jenis === "pilihan") {
+
+            if (jawaban === soal.kunci) {
+                jumlahBenar++;
+            }
+
+        } else {
+
+            const jawabanBersih = String(jawaban)
+                .trim()
+                .toLowerCase()
+                .replace(/\s+/g, "");
+
+            const kunciBersih = soal.kunci
+                .toLowerCase()
+                .replace(/\s+/g, "");
+
+            if (jawabanBersih === kunciBersih) {
+                jumlahBenar++;
+            }
+        }
+    });
+
+    const jumlahSalah = daftarSoal.length - jumlahBenar;
+    const nilaiAkhir = jumlahBenar * 10;
+
+    sudahSelesai = true;
+
+    document.getElementById("areaKuis").style.display = "none";
+    document.getElementById("hasil").style.display = "block";
+
+    document.getElementById("nilai").textContent = nilaiAkhir;
+    document.getElementById("benar").textContent = jumlahBenar;
+    document.getElementById("salah").textContent = jumlahSalah;
+    document.getElementById("nilaiAkhir").textContent = nilaiAkhir;
+}
+
+/* MEMBATALKAN KUIS */
+function batalkanKuis() {
+
+    if (sudahSelesai || sudahBatal) return;
+
+    sudahBatal = true;
+
+    /* Hapus seluruh jawaban siswa */
+    jawabanSiswa.fill(null);
+
+    /* Tampilkan layar pembatalan */
+    document.getElementById("layarBatal").style.display = "flex";
+
+    /* Nonaktifkan area kuis */
+    document.getElementById("areaKuis").style.display = "none";
+}
+
+/* PERINGATAN KETIKA AKAN KELUAR */
+window.addEventListener("beforeunload", function(event) {
+
+    if (!sudahSelesai && !sudahBatal) {
+        event.preventDefault();
+        event.returnValue = "";
+    }
+
+});
+
+/* DETEKSI KETIKA HALAMAN DITINGGALKAN */
+document.addEventListener("visibilitychange", function() {
+
+    if (document.visibilityState === "hidden") {
+        batalkanKuis();
+    }
+
+});
+
+/* DETEKSI KETIKA HALAMAN DITUTUP ATAU DINAVIGASI */
+window.addEventListener("pagehide", function() {
+
+    if (!sudahSelesai && !sudahBatal) {
+        jawabanSiswa.fill(null);
+    }
+
+});
+
+/* MULAI KUIS */
+tampilkanSoal();
+
+</script>
+
+</body>
+</html>
